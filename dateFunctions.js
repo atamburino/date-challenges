@@ -28,9 +28,17 @@ function calculateDaysSince(datesArray) {
 // Challenge 2: Filter Recent Dates
 // Given an array of date strings, return only the dates within the past 30 days.
 // Use `Date` object and the `filter` array method to find dates between 30 days ago and today.
-function getMonthNames(datesArray) {
+function filterRecentDates(datesArray) {
     
-    
+    const todaysDate = new Date();
+    const thirtyDaysAgo = new Date(todaysDate.getTime() - (30 * 24 * 60 * 60 * 1000));
+
+    // Filter
+    const filteredArray = datesArray.filter(dateString => {
+        const date = new Date(dateString);
+        return date >= thirtyDaysAgo && date <= todaysDate;
+    });
+    return filteredArray;
 }
 
 

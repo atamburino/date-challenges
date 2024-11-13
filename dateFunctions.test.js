@@ -27,6 +27,27 @@ global.Date = class extends RealDate {
     }
 };
 
+
+test('filterRecentDates', () => {
+    const datesArray = [
+        "2023-09-30", // 15 days before
+        "2023-10-01", // 14 days before
+        "2023-10-14", // 1 day before
+        "2023-09-01", // Outside 30 day scope
+        "3000-1-01"  // Future!!!!!!!!!!
+    ];
+
+    // 30 days from 2023-10-15
+    const expectedResult = [
+        "2023-09-30",
+        "2023-10-01",
+        "2023-10-14"
+    ];
+
+    const result = filterRecentDates(datesArray);
+    expect(result).toEqual(expectedResult);
+});
+
 describe('JavaScript Date Coding Challenges', () => {
     test('calculateDaysSince', () => {
         const startDate = "2023-01-01";
