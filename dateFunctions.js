@@ -5,13 +5,33 @@
 // map through each array index and calculate the number of days since each date. Use `Date` objects, subtraction for
 // date difference, and `Math.floor` to round to whole days.
 function calculateDaysSince(datesArray) {
-    
+
+        //SUDO CODE
+        // Map through each date in the array
+        // For each date string in the array:
+            // - Convert the date string to a Date object (using `new Date()`).
+            // - Get the current date as a Date object.
+            // - Subtract the start date from the current date to get the difference in milliseconds.
+            // - Convert milliseconds to days by dividing by (1000 * 60 * 60 * 24).
+            // - Use `Math.floor` to round down to the nearest whole number of days.
+        // - Return an array with the calculated days since each start date.
+
+        return datesArray.map(dateObject => {
+            const startDate = new Date(dateObject.startDate);
+            const currentDate = new Date();
+            const timeDifference = currentDate - startDate; // This is in milliseconds
+            const daysSince = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            return daysSince;
+        });
 }
 
 // Challenge 2: Filter Recent Dates
 // Given an array of date strings, return only the dates within the past 30 days.
 // Use `Date` object and the `filter` array method to find dates between 30 days ago and today.
-
+function getMonthNames(datesArray) {
+    
+    
+}
 
 
 // Challenge 3: Get Month Names
@@ -89,19 +109,19 @@ function getDayOfWeekForDates(datesArray) {
 module.exports = {
     calculateDaysSince,
     filterRecentDates,
-    getMonthNames,
-    sortDatesAscending,
-    calculateAges,
-    groupDatesByYear,
-    findFirstMonday,
-    checkLeapYears,
-    addDaysToDates,
-    getDayOfWeekForDates,
-    findMostRecentDate,
-    getLastDayOfMonth,
-    calculateDuration,
-    listDatesOfWeekdayInMonth,
-    getDateDifferences
+    // getMonthNames,
+    // sortDatesAscending,
+    // calculateAges,
+    // groupDatesByYear,
+    // findFirstMonday,
+    // checkLeapYears,
+    // addDaysToDates,
+    // getDayOfWeekForDates,
+    // findMostRecentDate,
+    // getLastDayOfMonth,
+    // calculateDuration,
+    // listDatesOfWeekdayInMonth,
+    // getDateDifferences
 }
 
 
