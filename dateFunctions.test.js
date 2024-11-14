@@ -3,7 +3,7 @@
 const {
     calculateDaysSince,
     filterRecentDates,
-    // getMonthNames,
+    getMonthNames,
     // sortDatesAscending,
     // calculateAges,
     // groupDatesByYear,

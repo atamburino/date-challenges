@@ -117,7 +117,7 @@ function getDayOfWeekForDates(datesArray) {
 module.exports = {
     calculateDaysSince,
     filterRecentDates,
-    // getMonthNames,
+    getMonthNames,
     // sortDatesAscending,
     // calculateAges,
     // groupDatesByYear,
