@@ -3,7 +3,7 @@
 const {
     calculateDaysSince,
     filterRecentDates,
-    // getMonthNames,
+    getMonthNames,
     // sortDatesAscending,
     // calculateAges,
     // groupDatesByYear,
@@ -60,6 +60,21 @@ test('filterRecentDates', () => {
     expect(result).toEqual(expectedResult);
 });
 // END OF TEST 2
+
+// Test 3: getMonthNames
+describe('getMonthNames Function', () => {
+    test('should return correct month names for valid Date objects', () => {
+        const datesArray = [
+            new Date(3000, 0, 1),  // January (months are 0-based in JS)
+            new Date(3000, 1, 15)  // February
+        ];
+        const expected = ['January', 'February'];
+        const result = getMonthNames(datesArray);
+        expect(result).toEqual(expected);
+    });
+});
+// END of Test 3
+
 
 
 // After all tests, restore the original Date object to avoid side effects in other tests.
