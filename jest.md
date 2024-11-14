@@ -256,6 +256,7 @@ project-root/
 Tip: Jest recognizes folders named __tests__ as a place to search for test files, making this pattern particularly useful in larger codebases.
 
 ### How Jest Finds and Runs Test Files
+
 When you run Jest (usually by executing npm test or jest from the command line):
 
 1. Automatic Discovery: Jest will search through your project’s directory tree for files matching the .test.js, .test.jsx, .spec.js, or .spec.jsx patterns.
@@ -263,6 +264,7 @@ When you run Jest (usually by executing npm test or jest from the command line):
 3. Test Results and Feedback: After running all tests, Jest displays results in the console, providing feedback on each test case. Passed tests are marked in green, and failed tests show errors and stack traces to help with debugging.
 
 ### Customizing Jest’s Search with Configuration (When Needed)
+
 You can customize Jest’s file discovery through the Jest configuration file (jest.config.js). For example, to specify custom patterns, use the testMatch option:
 
 ```javascript
@@ -288,6 +290,7 @@ This configuration helps tailor Jest’s behavior if you have specific folder st
 This comprehensive approach to testing in Jest will help you ensure your code is reliable, maintainable, and capable of handling unexpected inputs.
 
 ## Additional Resources
+
 Jest Documentation: Jest Official Documentation – provides in-depth information on all Jest features.
 Jest Matchers: Jest Expect API – comprehensive guide to Jest’s assertion methods.
 Writing Effective Tests: Blogs, tutorials, and best practices on structuring, naming, and organizing test suites.

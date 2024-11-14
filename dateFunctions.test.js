@@ -27,7 +27,19 @@ global.Date = class extends RealDate {
     }
 };
 
+// Test 1
+describe('JavaScript Date Coding Challenges', () => {
+    test('calculateDaysSince', () => {
+        const startDate = "2023-01-01";
+        const daysSince = Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));
+        expect(calculateDaysSince([{ startDate }])).toEqual([daysSince]);
+        expect(calculateDaysSince([{ startDate: "Invalid Date" }])).toEqual([NaN]);
+    });
+});
+// end of test 1
 
+
+// Test 2
 test('filterRecentDates', () => {
     const datesArray = [
         "2023-09-30", // 15 days before
@@ -47,17 +59,10 @@ test('filterRecentDates', () => {
     const result = filterRecentDates(datesArray);
     expect(result).toEqual(expectedResult);
 });
-
-describe('JavaScript Date Coding Challenges', () => {
-    test('calculateDaysSince', () => {
-        const startDate = "2023-01-01";
-        const daysSince = Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));
-        expect(calculateDaysSince([{ startDate }])).toEqual([daysSince]);
-        expect(calculateDaysSince([{ startDate: "Invalid Date" }])).toEqual([NaN]);
-    });
-});
+// END OF TEST 2
 
 
+// After all tests, restore the original Date object to avoid side effects in other tests.
 afterAll(() => {
     global.Date = RealDate; // Restore Date after test
 });
