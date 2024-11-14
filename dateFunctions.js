@@ -87,7 +87,33 @@ function sortDatesAscending(datesArray) {
 // Challenge 5: Calculate Age
 // Given an array of birthdates as strings (e.g., "2000-05-10"), return an array of ages.
 // Use `getFullYear` and `getMonth` to compare current date with birthdate, accounting for past birthdays.
+// Challenge 5: Calculate Age
+function calculateAges(bdayArray) {
+    if (!Array.isArray(bdayArray)) {
+        throw new Error('Input must be an array');
+    }
 
+    return bdayArray.map(dateStr => {  // Changed parameter name to dateStr
+        const birthDate = new Date(dateStr);
+        
+        // Check for invalid dates
+        if (isNaN(birthDate.getTime())) {
+            return NaN;
+        }
+
+        const today = new Date();
+        
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        
+        // If birthday hasn't occurred this year, subtract 1 from age
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        
+        return age;
+    });
+}
 
 
 // Challenge 6: Group Dates by Year
@@ -148,7 +174,7 @@ module.exports = {
     filterRecentDates,
     getMonthNames,
     sortDatesAscending,
-    // calculateAges,
+    calculateAges,
     // groupDatesByYear,
     // findFirstMonday,
     // checkLeapYears,

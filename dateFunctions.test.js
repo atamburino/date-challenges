@@ -5,7 +5,7 @@ const {
     filterRecentDates,
     getMonthNames,
     sortDatesAscending,
-    // calculateAges,
+    calculateAges,
     // groupDatesByYear,
     // findFirstMonday,
     // checkLeapYears,
@@ -112,6 +112,43 @@ describe('sortDatesAscending Function', () => {
         expect(() => {
             sortDatesAscending("not an array");
         }).toThrow('Input must be an array');
+    });
+});
+
+
+// Test 5: calculateAges
+describe('calculateAges Function', () => {
+    test('should calculate correct ages', () => {
+        const birthdates = [
+            "2000-05-10",  // 23 years old as of 2023-10-15
+            "2000-10-20",  // 22 years old (birthday hasn't occurred yet)
+            "1990-01-01",  // 33 years old
+        ];
+        const expected = [23, 22, 33];
+        expect(calculateAges(birthdates)).toEqual(expected);
+    });
+
+    test('should handle invalid dates', () => {
+        const birthdates = [
+            "invalid-date",
+            "2000-13-45",  // invalid month/day
+            "not-a-date"
+        ];
+        const result = calculateAges(birthdates);
+        result.forEach(age => {
+            expect(isNaN(age)).toBe(true);
+        });
+    });
+
+    test('should throw error for non-array input', () => {
+        expect(() => {
+            calculateAges("2000-05-10");
+        }).toThrow('Input must be an array');
+    });
+
+    test('should handle future dates', () => {
+        const birthdates = ["2024-01-01"];  // Future date
+        expect(calculateAges(birthdates)).toEqual([-1]);
     });
 });
 
