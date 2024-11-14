@@ -47,8 +47,23 @@ function filterRecentDates(datesArray) {
 // Use `getMonth` method to get the month index and map it to a month name array.
 function getMonthNames(datesArray) {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    
+    let newArray = [];
+
+    for (let i = 0; i < datesArray.length; i++) {
+        let d = datesArray[i];
+
+        // Check if d is a valid Date object
+        if (Object.prototype.toString.call(d) !== '[object Date]' || isNaN(d.getTime())) {
+            newArray.push("Invalid Date");
+        } else {
+            let nameOfMonth = monthNames[d.getMonth()];
+            newArray.push(nameOfMonth);
+        }
+    }
+
+    return newArray;
 }
+// getMonthNames(datesArray);
 
 // Challenge 4: Sort Dates in Ascending Order
 // Given an array of `Date` objects, return a new array sorted in ascending order.
