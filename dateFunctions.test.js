@@ -4,7 +4,7 @@ const {
     calculateDaysSince,
     filterRecentDates,
     getMonthNames,
-    // sortDatesAscending,
+    sortDatesAscending,
     // calculateAges,
     // groupDatesByYear,
     // findFirstMonday,
@@ -76,6 +76,44 @@ describe('getMonthNames Function', () => {
 // END of Test 3
 
 
+/// Test 4: sortDatesAscending
+describe('sortDatesAscending Function', () => {
+    test('should sort dates in ascending order', () => {
+        const january = new Date(2023, 0, 1);    // January 1, 2023
+        const june = new Date(2023, 5, 15);      // June 15, 2023
+        const december = new Date(2023, 11, 25);  // December 25, 2023
+        
+        // Verify dates were created correctly
+        console.log('Test dates:', {
+            january: january.toISOString(),
+            june: june.toISOString(),
+            december: december.toISOString()
+        });
+        
+        const datesArray = [december, january, june];
+        
+        const result = sortDatesAscending(datesArray);
+        
+        // Test length
+        expect(result.length).toBe(3);
+        
+        // Test order
+        expect(result[0].getMonth()).toBe(0);  // January
+        expect(result[1].getMonth()).toBe(5);  // June
+        expect(result[2].getMonth()).toBe(11); // December
+        
+        // Test years are correct
+        result.forEach(date => {
+            expect(date.getFullYear()).toBe(2023);
+        });
+    });
+
+    test('should throw error for non-array input', () => {
+        expect(() => {
+            sortDatesAscending("not an array");
+        }).toThrow('Input must be an array');
+    });
+});
 
 // After all tests, restore the original Date object to avoid side effects in other tests.
 afterAll(() => {
