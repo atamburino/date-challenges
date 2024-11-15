@@ -6,7 +6,7 @@ const {
     getMonthNames,
     sortDatesAscending,
     calculateAges,
-    // groupDatesByYear,
+    groupDatesByYear,
     // findFirstMonday,
     // checkLeapYears,
     // addDaysToDates,
@@ -149,6 +149,61 @@ describe('calculateAges Function', () => {
     test('should handle future dates', () => {
         const birthdates = ["2024-01-01"];  // Future date
         expect(calculateAges(birthdates)).toEqual([-1]);
+    });
+});
+
+
+// Test 6: groupDatesByYear
+describe('groupDatesByYear Function', () => {
+    test('should group multiple dates across different years', () => {
+        const dates = [
+            new Date(2022, 0, 1),    // January 1, 2022
+            new Date(2022, 11, 31),  // December 31, 2022
+            new Date(2023, 5, 15),   // June 15, 2023
+            new Date(2024, 0, 1)     // January 1, 2024
+        ];
+        
+        const result = groupDatesByYear(dates);
+        
+        // Test structure
+        expect(Object.keys(result)).toEqual(['2022', '2023', '2024']);
+        
+        // Test array lengths
+        expect(result['2022'].length).toBe(2);
+        expect(result['2023'].length).toBe(1);
+        expect(result['2024'].length).toBe(1);
+        
+        // Test specific dates
+        expect(result['2022'][0].getFullYear()).toBe(2022);
+        expect(result['2023'][0].getFullYear()).toBe(2023);
+        expect(result['2024'][0].getFullYear()).toBe(2024);
+    });
+
+    test('should handle all dates in the same year', () => {
+        const dates = [
+            new Date(2023, 0, 1),   // January 1, 2023
+            new Date(2023, 5, 15),  // June 15, 2023
+            new Date(2023, 11, 31)  // December 31, 2023
+        ];
+        
+        const result = groupDatesByYear(dates);
+        
+        // Test structure
+        expect(Object.keys(result)).toEqual(['2023']);
+        
+        // Test array length
+        expect(result['2023'].length).toBe(3);
+        
+        // Test all dates are in 2023
+        result['2023'].forEach(date => {
+            expect(date.getFullYear()).toBe(2023);
+        });
+    });
+
+    test('should throw error for non-array input', () => {
+        expect(() => {
+            groupDatesByYear("not an array");
+        }).toThrow('Input must be an array');
     });
 });
 
