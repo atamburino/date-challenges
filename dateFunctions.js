@@ -252,6 +252,23 @@ function getDayOfWeekForDates(datesArray) {
     "Friday",
     "Saturday",
   ];
+
+  // Input validation
+  if (!Array.isArray(datesArray)) {
+    throw new Error("Input must be an array");
+  }
+
+  return datesArray.map((date) => {
+    // Try to create a new Date object if it isn't one already
+    const dateObj = date instanceof Date ? date : new Date(date);
+
+    // Check if the date is valid
+    if (isNaN(dateObj.getTime())) {
+      return "Invalid Date";
+    }
+
+    return daysOfWeek[dateObj.getDay()];
+  });
 }
 
 // Challenge 11: Find Most Recent Date
@@ -284,7 +301,7 @@ module.exports = {
   findFirstMonday,
   checkLeapYears,
   addDaysToDates,
-  // getDayOfWeekForDates,
+  getDayOfWeekForDates,
   // findMostRecentDate,
   // getLastDayOfMonth,
   // calculateDuration,
