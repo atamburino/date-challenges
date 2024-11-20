@@ -12,7 +12,7 @@ const {
   addDaysToDates,
   getDayOfWeekForDates,
   findMostRecentDate,
-  // getLastDayOfMonth,
+  getLastDayOfMonth,
   // calculateDuration,
   // listDatesOfWeekdayInMonth,
   // getDateDifferences
@@ -359,14 +359,13 @@ describe("getDayOfWeekForDates Function", () => {
   });
 });
 
-
 // Test 11: findMostRecentDate
 describe("findMostRecentDate Function", () => {
   test("should find most recent date from array", () => {
     const dates = [
       new Date(2023, 0, 1),
       new Date(2024, 0, 1),
-      new Date(2023, 11, 31)
+      new Date(2023, 11, 31),
     ];
     const expected = new Date(2024, 0, 1);
     expect(findMostRecentDate(dates)).toEqual(expected);
@@ -388,6 +387,28 @@ describe("findMostRecentDate Function", () => {
     expect(() => {
       findMostRecentDate(["invalid", "also invalid"]);
     }).toThrow("No valid dates found in array");
+  });
+});
+
+// Test 12: getLastDayOfMonth
+describe("getLastDayOfMonth Function", () => {
+  test("should return correct last day for different months", () => {
+    expect(getLastDayOfMonth(2024, 2).getDate()).toBe(29); // February in leap year
+    expect(getLastDayOfMonth(2023, 2).getDate()).toBe(28); // February in non-leap year
+    expect(getLastDayOfMonth(2024, 4).getDate()).toBe(30); // April
+    expect(getLastDayOfMonth(2024, 12).getDate()).toBe(31); // December
+  });
+
+  test("should throw error for invalid month", () => {
+    expect(() => {
+      getLastDayOfMonth(2024, 13);
+    }).toThrow("Month must be between 1 and 12");
+  });
+
+  test("should throw error for non-integer inputs", () => {
+    expect(() => {
+      getLastDayOfMonth("2024", 1);
+    }).toThrow("Year and month must be integers");
   });
 });
 
