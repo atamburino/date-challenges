@@ -223,13 +223,19 @@ function addDaysToDates(arrayInputDateObjects, numberOfDays) {
   }
 
   return arrayInputDateObjects.map((dateObj) => {
-    if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
+    // Try to create a new date from the input
+    const newDate = new Date(dateObj);
+
+    // Check if the new date is valid
+    if (isNaN(newDate.getTime())) {
       throw new Error("All array elements must be valid Date objects");
     }
 
-    const newDate = new Date(dateObj);
-    newDate.setDate(dateObj.getDate() + numberOfDays);
-    return newDate;
+    // Add the days
+    newDate.setDate(newDate.getDate() + numberOfDays);
+
+    // Return the date in the required format
+    return newDate.toDateString();
   });
 }
 

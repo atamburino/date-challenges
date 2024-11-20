@@ -297,6 +297,7 @@ describe("checkLeapYears Function", () => {
 
 // Test 9: addDaysToDates
 describe("addDaysToDates Function", () => {
+  // Keep existing error test cases
   test("should throw error for non-array input", () => {
     expect(() => {
       addDaysToDates(new Date(), 5);
@@ -316,6 +317,20 @@ describe("addDaysToDates Function", () => {
     expect(() => {
       addDaysToDates([validDate, "invalid", validDate], 5);
     }).toThrow("All array elements must be valid Date objects");
+  });
+
+  test("should add positive days correctly", () => {
+    const dates = [
+      new Date(2024, 4, 12), // May 12, 2024
+      new Date(2024, 7, 20), // August 20, 2024
+      new Date(2023, 2, 28), // March 28, 2023
+    ];
+
+    expect(addDaysToDates(dates, 2)).toEqual([
+      "Tue May 14 2024",
+      "Thu Aug 22 2024",
+      "Thu Mar 30 2023",
+    ]);
   });
 });
 
