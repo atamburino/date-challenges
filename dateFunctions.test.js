@@ -7,7 +7,7 @@ const {
     sortDatesAscending,
     calculateAges,
     groupDatesByYear,
-    // findFirstMonday,
+    findFirstMonday,
     // checkLeapYears,
     // addDaysToDates,
     // getDayOfWeekForDates,
@@ -206,6 +206,58 @@ describe('groupDatesByYear Function', () => {
         }).toThrow('Input must be an array');
     });
 });
+
+
+// Test 7: findFirstMonday
+describe('findFirstMonday Function', () => {
+    test('should find first Monday for different months in 2024', () => {
+        expect(findFirstMonday(2024, 1).getDate()).toBe(1);  // January 1, 2024 is a Monday
+        expect(findFirstMonday(2024, 3).getDate()).toBe(4);  // March 4, 2024 is first Monday
+        expect(findFirstMonday(2024, 4).getDate()).toBe(1);  // April 1, 2024 is a Monday
+    });
+
+    test('should handle different years correctly', () => {
+        expect(findFirstMonday(2023, 10).getDate()).toBe(2);  // October 2, 2023 is first Monday
+        expect(findFirstMonday(2025, 1).getDate()).toBe(6);   // January 6, 2025 is first Monday
+    });
+
+    test('should return correct day of week', () => {
+        const result = findFirstMonday(2024, 5);
+        expect(result.getDay()).toBe(1);  // Should always be Monday (1)
+    });
+
+    test('should handle invalid inputs', () => {
+        // Test invalid month numbers
+        expect(() => {
+            findFirstMonday(2024, 13)
+        }).toThrow('Month must be between 1 and 12');
+        
+        expect(() => {
+            findFirstMonday(2024, 0)
+        }).toThrow('Month must be between 1 and 12');
+
+        // Test non-integer inputs
+        expect(() => {
+            findFirstMonday('invalid', 1)
+        }).toThrow('Year and month must be integers');
+        
+        expect(() => {
+            findFirstMonday(2024, 'invalid')
+        }).toThrow('Year and month must be integers');
+    });
+
+    test('should handle month numbers correctly', () => {
+        const december = findFirstMonday(2024, 12);
+        expect(december.getMonth()).toBe(11);  // December should be 11 internally
+        expect(december.getDate()).toBe(2);    // First Monday of December 2024
+    });
+});
+
+    test('should handle month numbers correctly', () => {
+        const december = findFirstMonday(2024, 12);
+        expect(december.getMonth()).toBe(11);  // December should be 11 internally
+        expect(december.getDate()).toBe(2);    // First Monday of December 2024
+    });
 
 // After all tests, restore the original Date object to avoid side effects in other tests.
 afterAll(() => {
