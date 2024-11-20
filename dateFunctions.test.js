@@ -8,7 +8,7 @@ const {
     calculateAges,
     groupDatesByYear,
     findFirstMonday,
-    // checkLeapYears,
+    checkLeapYears,
     // addDaysToDates,
     // getDayOfWeekForDates,
     // findMostRecentDate,
@@ -258,6 +258,55 @@ describe('findFirstMonday Function', () => {
         expect(december.getMonth()).toBe(11);  // December should be 11 internally
         expect(december.getDate()).toBe(2);    // First Monday of December 2024
     });
+
+
+    // Test 8: checkLeapYears
+describe('checkLeapYears Function', () => {
+    test('should correctly identify leap years', () => {
+        const years = [2000, 2020, 2024, 2025];
+        const expected = [true, true, true, false];
+        expect(checkLeapYears(years)).toEqual(expected);
+    });
+
+    test('should handle century years correctly', () => {
+        const years = [1900, 2000, 2100, 2400];
+        const expected = [false, true, false, true];
+
+
+        
+        // 1900 is not a leap year (divisible by 100 but not 400)
+        // 2000 is a leap year (divisible by 400)
+        // 2100 is not a leap year (divisible by 100 but not 400)
+        // 2400 is a leap year (divisible by 400)
+
+
+
+        expect(checkLeapYears(years)).toEqual(expected);
+    });
+
+    test('should throw error for non-array input', () => {
+        expect(() => {
+            checkLeapYears(2024);
+        }).toThrow('Input must be an array');
+    });
+
+    test('should throw error for non-integer years', () => {
+        expect(() => {
+            checkLeapYears([2024, "2025", 2026]);
+        }).toThrow('All array elements must be valid integers');
+    });
+
+    test('should handle empty array', () => {
+        expect(checkLeapYears([])).toEqual([]);
+    });
+
+    test('should handle negative years', () => {
+        const years = [-4, -100, -400];
+        const expected = [true, false, true];
+        expect(checkLeapYears(years)).toEqual(expected);
+    });
+});
+
 
 // After all tests, restore the original Date object to avoid side effects in other tests.
 afterAll(() => {
