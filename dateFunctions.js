@@ -301,7 +301,7 @@ module.exports = {
   findFirstMonday,
   checkLeapYears,
   addDaysToDates,
-  // getDayOfWeekForDates,
+  getDayOfWeekForDates,
   // findMostRecentDate,
   // getLastDayOfMonth,
   // calculateDuration,

@@ -10,7 +10,7 @@ const {
   findFirstMonday,
   checkLeapYears,
   addDaysToDates,
-  // getDayOfWeekForDates,
+  getDayOfWeekForDates,
   // findMostRecentDate,
   // getLastDayOfMonth,
   // calculateDuration,
@@ -331,6 +331,31 @@ describe("addDaysToDates Function", () => {
       "Thu Aug 22 2024",
       "Thu Mar 30 2023",
     ]);
+  });
+});
+
+// Test 10: getDayOfWeekForDates
+describe("getDayOfWeekForDates Function", () => {
+  test("should return correct day names for valid dates", () => {
+    const dates = [
+      new Date(2024, 0, 1), // Monday
+      new Date(2024, 0, 2), // Tuesday
+      new Date(2024, 0, 3), // Wednesday
+    ];
+    const expected = ["Monday", "Tuesday", "Wednesday"];
+    expect(getDayOfWeekForDates(dates)).toEqual(expected);
+  });
+
+  test("should handle invalid dates", () => {
+    const dates = [new Date("invalid"), "not a date"];
+    const expected = ["Invalid Date", "Invalid Date"];
+    expect(getDayOfWeekForDates(dates)).toEqual(expected);
+  });
+
+  test("should throw error for non-array input", () => {
+    expect(() => {
+      getDayOfWeekForDates("not an array");
+    }).toThrow("Input must be an array");
   });
 });
 
