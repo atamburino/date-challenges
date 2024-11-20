@@ -9,7 +9,7 @@ const {
   groupDatesByYear,
   findFirstMonday,
   checkLeapYears,
-  // addDaysToDates,
+  addDaysToDates,
   // getDayOfWeekForDates,
   // findMostRecentDate,
   // getLastDayOfMonth,
@@ -292,6 +292,30 @@ describe("checkLeapYears Function", () => {
     const years = [-4, -100, -400];
     const expected = [true, false, true];
     expect(checkLeapYears(years)).toEqual(expected);
+  });
+});
+
+// Test 9: addDaysToDates
+describe("addDaysToDates Function", () => {
+  test("should throw error for non-array input", () => {
+    expect(() => {
+      addDaysToDates(new Date(), 5);
+    }).toThrow("First argument must be an array");
+  });
+
+  test("should throw error for non-integer days", () => {
+    const date = new Date(2024, 0, 1);
+    const dates = [date];
+    expect(() => {
+      addDaysToDates(dates, "5");
+    }).toThrow("Second argument must be an integer");
+  });
+
+  test("should throw error for invalid dates in array", () => {
+    const validDate = new Date(2024, 0, 1);
+    expect(() => {
+      addDaysToDates([validDate, "invalid", validDate], 5);
+    }).toThrow("All array elements must be valid Date objects");
   });
 });
 
