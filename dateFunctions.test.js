@@ -11,7 +11,7 @@ const {
   checkLeapYears,
   addDaysToDates,
   getDayOfWeekForDates,
-  // findMostRecentDate,
+  findMostRecentDate,
   // getLastDayOfMonth,
   // calculateDuration,
   // listDatesOfWeekdayInMonth,
@@ -356,6 +356,38 @@ describe("getDayOfWeekForDates Function", () => {
     expect(() => {
       getDayOfWeekForDates("not an array");
     }).toThrow("Input must be an array");
+  });
+});
+
+
+// Test 11: findMostRecentDate
+describe("findMostRecentDate Function", () => {
+  test("should find most recent date from array", () => {
+    const dates = [
+      new Date(2023, 0, 1),
+      new Date(2024, 0, 1),
+      new Date(2023, 11, 31)
+    ];
+    const expected = new Date(2024, 0, 1);
+    expect(findMostRecentDate(dates)).toEqual(expected);
+  });
+
+  test("should handle string dates", () => {
+    const dates = ["2023-01-01", "2024-01-01", "2023-12-31"];
+    const expected = new Date("2024-01-01");
+    expect(findMostRecentDate(dates)).toEqual(expected);
+  });
+
+  test("should throw error for empty array", () => {
+    expect(() => {
+      findMostRecentDate([]);
+    }).toThrow("Input must be a non-empty array");
+  });
+
+  test("should throw error when no valid dates found", () => {
+    expect(() => {
+      findMostRecentDate(["invalid", "also invalid"]);
+    }).toThrow("No valid dates found in array");
   });
 });
 
