@@ -143,7 +143,31 @@ function groupDatesByYear(dateCollection) {
 // Challenge 7: Find First Monday of Month
 // Given a year and a month, find the date of the first Monday of that month.
 // Use a `while` loop and `getDay` to increment the date until it reaches Monday (1).
-
+function findFirstMonday(inputYear, inputMonth) {
+    // Validate inputs
+    if (!Number.isInteger(inputYear) || !Number.isInteger(inputMonth)) {
+        throw new Error('Year and month must be integers');
+    }
+    
+    if (inputMonth < 1 || inputMonth > 12) {
+        throw new Error('Month must be between 1 and 12');
+    }
+    
+    // Create a new date object for the first day of the given month
+    let date = new Date(inputYear, inputMonth - 1, 1);
+    
+    // Validate the resulting date
+    if (isNaN(date.getTime())) {
+        throw new Error('Invalid date');
+    }
+    
+    // Keep incrementing the day until we find a Monday
+    while (date.getDay() !== 1) {  // 1 represents Monday
+        date.setDate(date.getDate() + 1);
+    }
+    
+    return date;
+}
 
 // Challenge 8: Check Leap Year
 // Given an array of years, return an array of booleans indicating if each year is a leap year.
@@ -195,7 +219,7 @@ module.exports = {
     sortDatesAscending,
     calculateAges,
     groupDatesByYear,
-    // findFirstMonday,
+    findFirstMonday,
     // checkLeapYears,
     // addDaysToDates,
     // getDayOfWeekForDates,
